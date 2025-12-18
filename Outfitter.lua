@@ -197,6 +197,11 @@ local Outfitter_cStatIDItems = {
 	ArgentDawn = Outfitter_cArgentDawnTrinkets,
 };
 
+local Outfitter_cSwimmingItems = {
+	{ Code = 19979, SubCode = 0 }, -- Outfitter_cHookOfTheMasterAngler
+	{ Code = 58079, SubCode = 0 }, -- Outfitter_cPearlescentShard
+};
+
 local Outfitter_cIgnoredUnusedItems = {
 	[2901] = "Mining Pick",
 	[5956] = "Blacksmith hammer",
@@ -348,6 +353,7 @@ local gOutfitter_AuraIconSpecialID = {
 local Outfitter_cSpecialOutfitDescriptions = {
 	ArgentDawn = Outfitter_cArgentDawnOutfitDescription,
 	Riding = Outfitter_cRidingOutfitDescription,
+	Swimming = Outfitter_cSwimmingOutfitDescription,
 	Dining = Outfitter_cDiningOutfitDescription,
 	Battleground = Outfitter_cBattlegroundOutfitDescription,
 	AB = Outfitter_cArathiBasinOutfitDescription,
@@ -686,6 +692,12 @@ function Outfitter_OnLoad()
 	Outfitter_RegisterEvent(this, "PLAYER_DEAD", Outfitter_PlayerDead);
 	Outfitter_RegisterEvent(this, "PLAYER_ALIVE", Outfitter_PlayerAlive);
 	Outfitter_RegisterEvent(this, "PLAYER_UNGHOST", Outfitter_PlayerAlive);
+
+	-- For monitoring player swimming/not swimming
+	Outfitter_RegisterEvent(this, "PLAYER_SWIMMING", Outfitter_PlayerSwimming);
+	Outfitter_RegisterEvent(this, "PLAYER_NOT_SWIMMING", Outfitter_PlayerNotSwimming);
+
+	-- For monitoring inventory changes
 
 	Outfitter_RegisterEvent(this, "UNIT_INVENTORY_CHANGED", Outfitter_InventoryChanged);
 
